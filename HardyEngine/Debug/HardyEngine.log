@@ -1,0 +1,3 @@
+﻿  Window.cpp
+C:\Users\allis\Documents\GitHub\HardyEngine\HardyEngine\HardyEngine\Window.cpp(36,26): error C2382: 'Window::MessageHangle': redefinition; different exception specifications
+C:\Users\allis\Documents\GitHub\HardyEngine\HardyEngine\HardyEngine\Window.h(27): message : see declaration of 'Window::MessageHangle'
