@@ -14,6 +14,8 @@ private:
 		~WindowClass();
 	public:
 		static WindowClass windowClass;
+		static HINSTANCE GetInstance();
+	private: 
 		HINSTANCE hInstance;
 
 	};
@@ -23,10 +25,10 @@ public:
 		~Window();
 		Window(const Window& window) = delete;
 		Window& operator=(const Window& window) = delete;
-
+		static constexpr const char* windowClassName = "Hardy Engine";
 		static LRESULT CALLBACK MessageHangle(HWND hWnd,UINT uMsg, WPARAM wParameter,LPARAM lParameter );
 private:
-	HWND hWnd;
+	HWND hWindow;
 	int height;
 	int width;
 
