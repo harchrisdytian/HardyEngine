@@ -1,0 +1,5 @@
+﻿  Window.cpp
+  WinMain.cpp
+C:\Users\christian hardy\OneDrive\Documents\GitHub\HardyEngine\HardyEngine\WinMain.cpp(20,13): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
+  Generating Code...
+  HardyEngine.vcxproj -> C:\Users\christian hardy\OneDrive\Documents\GitHub\HardyEngine\x64\Debug\HardyEngine.exe

@@ -1,11 +1,13 @@
 #include "Window.h"
 
+//singleton
+Window::WindowClass Window::WindowClass::windowClass;
 
 Window::WindowClass::WindowClass()
 {
 	WNDCLASSEX wndClass = {};
 	wndClass.style = CS_OWNDC;
-	wndClass.lpfnWndProc = MessageHangle;
+	wndClass.lpfnWndProc = MessageStartUp;
 	wndClass.cbSize = sizeof(wndClass);
 	wndClass.cbClsExtra = 0;
 	wndClass.cbWndExtra = 0;
@@ -30,7 +32,7 @@ HINSTANCE Window::WindowClass::GetInstance()
 	return windowClass.hInstance;
 }
 
-Window::Window(int heght, int width, const char* name)
+Window::Window(int height, int width, const char* name)
 	:
 	width(width), 
 	height(height)
@@ -47,10 +49,10 @@ Window::Window(int heght, int width, const char* name)
 		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
 		CW_USEDEFAULT, CW_USEDEFAULT,
 		rect.right - rect.left,
-		rect.top - rect.bottom,
+		rect.bottom - rect.top,
 		nullptr, nullptr, WindowClass::GetInstance(), this);
 	
-
+	ShowWindow(hWindow, SW_SHOWDEFAULT);
 	
 
 
@@ -58,11 +60,39 @@ Window::Window(int heght, int width, const char* name)
 
 Window::~Window()
 {
+	DestroyWindow(hWindow);
 }
-LRESULT CALLBACK Window::MessageHangle(HWND hWnd,UINT uMsg,WPARAM wParameter, LPARAM lParameter) 
+
+
+LRESULT CALLBACK Window::MessageHandle(HWND hWnd,UINT uMsg,WPARAM wParameter, LPARAM lParameter) 
 {
+	switch (uMsg)
+	{
+	case WM_CLOSE:
+		PostQuitMessage(20);
+		return 20;
+	}
 	return DefWindowProc(hWnd, uMsg, wParameter, lParameter);
 }
-//singleton
-Window::WindowClass Window::WindowClass::windowClass;
 
+LRESULT Window::MessageStartUp(HWND hWindow, UINT uMsg, WPARAM wParameter, LPARAM lParameter)
+{
+	if (uMsg == WM_CREATE) {
+		// translates the creation to use winapi to handle user-data
+		const CREATESTRUCTW* const pCreate = reinterpret_cast<CREATESTRUCTW*>(lParameter);
+		Window* const pWindow = static_cast<Window*>(pCreate->lpCreateParams); 
+		SetWindowLongPtr(hWindow, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWindow));
+		//
+		SetWindowLongPtr(hWindow, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&Window::MessageTranslator));
+
+		return pWindow->MessageHandle(hWindow,uMsg,wParameter,lParameter);
+
+	}
+	return DefWindowProc(hWindow, uMsg, wParameter, lParameter);
+}
+LRESULT Window::MessageTranslator(HWND hWindow, UINT uMsg, WPARAM wParameter, LPARAM lParameter) 
+{
+	Window* const pWindow = reinterpret_cast<Window*>(GetWindowLongPtr(hWindow, GWLP_USERDATA));
+	// parse threw pointer 
+	return pWindow->MessageHandle(hWindow, uMsg, wParameter, lParameter);
+}
