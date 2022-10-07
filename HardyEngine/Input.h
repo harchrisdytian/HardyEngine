@@ -31,12 +31,14 @@ private:
 	void OnCharPressed(char event);
 	void OnMouseButtonPressed(Event event);
 	void OnMouseButtonRelease(Event event);
+	void GetPos(int& x, int& y);
+	void SetPos(const int _x, const int _y);
 private:
 
 	static constexpr unsigned int nKeys = 256u;
 	static constexpr unsigned int bufferSize = 16u;
 	bool leftMouse, rightMouse;
-
+	int x, y;
 	std::bitset<nKeys> keystates;
 	std::queue<Event> keyBuffer;
 	std::queue<Event> mouseBuffer;

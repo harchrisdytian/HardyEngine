@@ -12,7 +12,11 @@ int CALLBACK WinMain(
 	BOOL gMsgRes;
 	while (( gMsgRes = GetMessage(&gMsg, nullptr,0,0)) >0)
 	{
-		if (win.keyboard);
+		//return gMsg.wParam;
+		if (win.input.IsKeyPressed('E'))
+		{
+			return gMsg.wParam;
+		}
 		TranslateMessage(&gMsg);
 		DispatchMessage(&gMsg);
 		

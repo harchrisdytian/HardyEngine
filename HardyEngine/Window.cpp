@@ -79,24 +79,43 @@ LRESULT CALLBACK Window::MessageHandle(HWND hWnd,UINT uMsg,WPARAM wParameter, LP
 	case WM_SYSKEYDOWN:
 	case WM_KEYDOWN:
 	{
-		const Event e = Event(Event::Type::KEY_PRESSED,static_cast<char>(wParameter));
+		const Event e = Event(Event::Type::KEY_PRESSED, static_cast<unsigned char>(wParameter));
+		
 		input.OnKeyPressed(e);
 		break;
 	
 	}
 		 //OnKeyPressed(e);
 		//Input input;
-
+	case WM_SYSKEYUP:
 	case WM_KEYUP:
 	{
 		{
-		 const Event e = Event(Event::Type::KEY_RELEASED, static_cast<char>(wParameter));
+		 const Event e = Event(Event::Type::KEY_RELEASED, static_cast<unsigned char>(wParameter));
 		 input.OnKeyRelease(e);
 		 break;
 		}
 	}
+	// Mouse input
+	case WM_MOUSEMOVE: 
+	{
+
+		const POINTS pt = MAKEPOINTS(lParameter);
+		if (pt.x >= 0 && pt.x < width && pt.y >= 0 && pt.y < height)
+		{
+			input.SetPos(pt.x, pt.y);
+		}
+		break;
+		}
+	case WM_LBUTTONDOWN:
+	{
+		const POINTS pt = MAKEPOINTS(lParameter);
+		Event e = Event(Event::Type::MOUSE_LEFT_PRESSED, pt.x,pt.y,true, false);
+		e.SetCode(pt.x, pt.y);
 
 	}
+	}
+
 	return DefWindowProc(hWnd, uMsg, wParameter, lParameter);
 }
 

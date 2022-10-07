@@ -66,8 +66,8 @@ void Input::Flush()
 void Input::OnKeyPressed(Event event) 
 {
     if (!event.IsMouse()) {
-        
-         keyBuffer.push(event);
+        keystates[event.GetCode()] = true;
+        keyBuffer.push(event);
     }
 }
 /// <summary>
@@ -77,13 +77,10 @@ void Input::OnKeyPressed(Event event)
 void Input::OnKeyRelease(Event event)
 {
     if (!event.IsMouse()) {
-
+        keystates[event.GetCode()] = false;
         keyBuffer.push(event);
     }
-    else
-    {
-        throw std::invalid_argument("keyboard input recieving mouse input");
-    }
+    
 }
 
 void Input::OnCharPressed(char event)
@@ -95,12 +92,32 @@ void Input::OnMouseButtonPressed(Event event)
 {
     if (event.IsMouse()) {
         mouseBuffer.push(event);
-        leftMouse = event.IsLeftPressed();
-        rightMouse = event.IsRightPressed();
+        if (event.IsRight()) {
+            rightMouse = true;
+        }
+        else {
+            leftMouse = true;
+        }
     }
 }
 
 void Input::OnMouseButtonRelease(Event event)
 {
+    if (event.IsMouse()) {
+        mouseBuffer.push(event);
+        
+    }
+}
+
+void Input::GetPos(int& pX, int& pY)
+{
+    pX = x;
+    pY = y;
+}
+
+void Input::SetPos(const int _x, const int _y)
+{
+    x = _x;
+    y = _y;
 }
 

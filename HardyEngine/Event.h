@@ -28,19 +28,22 @@ private:
 	bool is_mouse;
 public:
 	Event(Type type,char code);
-	//Event(Type type, int x, int y, bool left, bool right);
+	Event(Type type, int x, int y, bool left, bool right);
 	bool IsMouse() 
 	{
+		
 		return is_mouse;
+		
 	}
-	bool IsRightPressed()
+	bool IsRight()
 	{
-		return rightPressed;
+		return type == Type::MOUSE_RIGHT_PRESSED || type== Type::MOUSE_RIGHT_RELEASED;
 	}
-	bool IsLeftPressed()
+	bool IsLeft()
 	{
-		return leftPressed;
+		return type == MOUSE_LEFT_PRESSED || type == Type::MOUSE_LEFT_RELEASED;
 	}
+	void SetCode(int x, int y);
 	bool IsPressed();
 	bool IsReleased();
 	unsigned char GetCode();
