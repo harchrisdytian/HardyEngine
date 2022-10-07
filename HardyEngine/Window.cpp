@@ -3,6 +3,7 @@
 //singleton
 Window::WindowClass Window::WindowClass::windowClass;
 
+
 Window::WindowClass::WindowClass()
 {
 	WNDCLASSEX wndClass = {};
@@ -66,11 +67,35 @@ Window::~Window()
 
 LRESULT CALLBACK Window::MessageHandle(HWND hWnd,UINT uMsg,WPARAM wParameter, LPARAM lParameter) 
 {
+	
 	switch (uMsg)
 	{
 	case WM_CLOSE:
 		PostQuitMessage(20);
 		return 20;
+
+	//***  ******//
+	// Input Handler
+	case WM_SYSKEYDOWN:
+	case WM_KEYDOWN:
+	{
+		const Event e = Event(Event::Type::KEY_PRESSED,static_cast<char>(wParameter));
+		input.OnKeyPressed(e);
+		break;
+	
+	}
+		 //OnKeyPressed(e);
+		//Input input;
+
+	case WM_KEYUP:
+	{
+		{
+		 const Event e = Event(Event::Type::KEY_RELEASED, static_cast<char>(wParameter));
+		 input.OnKeyRelease(e);
+		 break;
+		}
+	}
+
 	}
 	return DefWindowProc(hWnd, uMsg, wParameter, lParameter);
 }

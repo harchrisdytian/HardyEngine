@@ -12,9 +12,10 @@ int CALLBACK WinMain(
 	BOOL gMsgRes;
 	while (( gMsgRes = GetMessage(&gMsg, nullptr,0,0)) >0)
 	{
+		if (win.keyboard);
 		TranslateMessage(&gMsg);
 		DispatchMessage(&gMsg);
-
+		
 	}
 	
 	return gMsg.wParam;
