@@ -71,7 +71,7 @@ LRESULT CALLBACK Window::MessageHandle(HWND hWnd,UINT uMsg,WPARAM wParameter, LP
 	switch (uMsg)
 	{
 	case WM_CLOSE:
-		PostQuitMessage(20);
+		PostQuitMessage(67);
 		return 20;
 
 	//***  ******//
@@ -107,13 +107,26 @@ LRESULT CALLBACK Window::MessageHandle(HWND hWnd,UINT uMsg,WPARAM wParameter, LP
 		}
 		break;
 		}
+
 	case WM_LBUTTONDOWN:
 	{
 		const POINTS pt = MAKEPOINTS(lParameter);
 		Event e = Event(Event::Type::MOUSE_LEFT_PRESSED, pt.x,pt.y,true, false);
-		e.SetCode(pt.x, pt.y);
-
+		input.SetPos(pt.y, pt.y);
+		input.OnMouseButtonPressed(e);
+		break;
 	}
+	case WM_RBUTTONDOWN:
+	{
+		const POINTS pt = MAKEPOINTS(lParameter);
+		Event e = Event(Event::Type::MOUSE_RIGHT_PRESSED, pt.x, pt.y, true, false);
+		input.SetPos(pt.y, pt.y);
+		input.OnMouseButtonPressed(e);
+		break;
+	}
+	case WM_MOUSEWHEEL:
+		const int delta GET_WHEEL_DELTA_WPARAM(wParameter);
+		input.OnWheelDelta(delta);
 	}
 
 	return DefWindowProc(hWnd, uMsg, wParameter, lParameter);

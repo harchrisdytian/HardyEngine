@@ -6,6 +6,7 @@
 #include <optional>
 #include <stdexcept>
 
+
 class Input
 {
 	friend class Window;
@@ -25,7 +26,9 @@ public:
 	void Flush();
 #pragma endregion
 private:
-
+	void OnWheelDelta( int delta);
+	void MouseUp();
+	void MouseDown();
 	void OnKeyPressed(Event event) ;
 	void OnKeyRelease(Event event);
 	void OnCharPressed(char event);
@@ -37,6 +40,7 @@ private:
 
 	static constexpr unsigned int nKeys = 256u;
 	static constexpr unsigned int bufferSize = 16u;
+	int WheelDeltaStep = 0;
 	bool leftMouse, rightMouse;
 	int x, y;
 	std::bitset<nKeys> keystates;

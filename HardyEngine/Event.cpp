@@ -29,10 +29,10 @@ Event::Event(Type type, int x, int y, bool left, bool right) :
 	rightPressed(right)
 {
 	is_mouse = true;
-
+	code = 0;
 }
 
-void Event::SetCode(int _x, int _y)
+void Event::SetPos(int _x, int _y)
 {
 	x = _x;
 	y = _y;

@@ -43,7 +43,7 @@ public:
 	{
 		return type == MOUSE_LEFT_PRESSED || type == Type::MOUSE_LEFT_RELEASED;
 	}
-	void SetCode(int x, int y);
+	void SetPos(int x, int y);
 	bool IsPressed();
 	bool IsReleased();
 	unsigned char GetCode();

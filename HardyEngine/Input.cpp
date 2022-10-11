@@ -1,3 +1,4 @@
+#include <Windows.h>
 #include "Input.h"
 
 
@@ -105,7 +106,12 @@ void Input::OnMouseButtonRelease(Event event)
 {
     if (event.IsMouse()) {
         mouseBuffer.push(event);
-        
+        if (event.IsRight()) {
+            rightMouse = false;
+        }
+        else {
+            leftMouse = false;
+        }
     }
 }
 
@@ -121,3 +127,22 @@ void Input::SetPos(const int _x, const int _y)
     y = _y;
 }
 
+void Input::OnWheelDelta(int delta) {
+    WheelDeltaStep += delta;
+    while (WheelDeltaStep >= WHEEL_DELTA) {
+        MouseUp();
+        WheelDeltaStep -= WheelDeltaStep;
+    }
+    while (WheelDeltaStep <= WHEEL_DELTA) {
+        MouseDown();
+        WheelDeltaStep += WheelDeltaStep;
+    }
+}
+
+void Input::MouseUp()
+{
+}
+
+void Input::MouseDown()
+{
+}
