@@ -87,6 +87,12 @@ LRESULT CALLBACK Window::MessageHandle(HWND hWnd,UINT uMsg,WPARAM wParameter, LP
 	}
 		 //OnKeyPressed(e);
 		//Input input;
+
+	case WM_CHAR:
+	{
+		input.OnCharPressed(static_cast<unsigned char>(wParameter));
+		break;
+	}
 	case WM_SYSKEYUP:
 	case WM_KEYUP:
 	{
@@ -116,6 +122,14 @@ LRESULT CALLBACK Window::MessageHandle(HWND hWnd,UINT uMsg,WPARAM wParameter, LP
 		input.OnMouseButtonPressed(e);
 		break;
 	}
+	case WM_LBUTTONUP:
+	{
+		const POINTS pt = MAKEPOINTS(lParameter);
+		Event e = Event(Event::Type::MOUSE_LEFT_RELEASED, pt.x, pt.y, true, false);
+		input.SetPos(pt.y, pt.y);
+		input.OnMouseButtonRelease(e);
+		break;
+	}
 	case WM_RBUTTONDOWN:
 	{
 		const POINTS pt = MAKEPOINTS(lParameter);
@@ -124,9 +138,36 @@ LRESULT CALLBACK Window::MessageHandle(HWND hWnd,UINT uMsg,WPARAM wParameter, LP
 		input.OnMouseButtonPressed(e);
 		break;
 	}
+	case WM_RBUTTONUP:
+	{
+		const POINTS pt = MAKEPOINTS(lParameter);
+		Event e = Event(Event::Type::MOUSE_RIGHT_RELEASED, pt.x, pt.y, true, false);
+		input.SetPos(pt.y, pt.y);
+		input.OnMouseButtonRelease(e);
+		break;
+	}
+	case WM_MBUTTONDOWN:
+	{
+		const POINTS pt = MAKEPOINTS(lParameter);
+		Event e = Event(Event::Type::MOUSE_MIDDLE_PRESSED, pt.x, pt.y, true, false);
+		input.SetPos(pt.y, pt.y);
+		input.OnMouseButtonPressed(e);
+		break;
+	}
+	case WM_MBUTTONUP:
+	{
+		const POINTS pt = MAKEPOINTS(lParameter);
+		Event e = Event(Event::Type::MOUSE_MIDDLE_RELEASED, pt.x, pt.y, true, false);
+		input.SetPos(pt.y, pt.y);
+		input.OnMouseButtonRelease(e);
+		break;
+	}
 	case WM_MOUSEWHEEL:
-		const int delta GET_WHEEL_DELTA_WPARAM(wParameter);
+	{
+		const int delta  = GET_WHEEL_DELTA_WPARAM(wParameter);
 		input.OnWheelDelta(delta);
+		break;
+	 }
 	}
 
 	return DefWindowProc(hWnd, uMsg, wParameter, lParameter);

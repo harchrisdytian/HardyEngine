@@ -23,8 +23,16 @@ public:
 	void FlushMouse();
 	void FlushKeyBoard();
 	std::optional<Event> ReadChar();
+	std::optional<Event> ReadMouse();
+
 	void Flush();
 #pragma endregion
+
+	void GetPos(int& x, int& y);
+	int GetPosX();
+	int GetPosY();
+	void SetPos(const int _x, const int _y);
+	
 private:
 	void OnWheelDelta( int delta);
 	void MouseUp();
@@ -34,14 +42,12 @@ private:
 	void OnCharPressed(char event);
 	void OnMouseButtonPressed(Event event);
 	void OnMouseButtonRelease(Event event);
-	void GetPos(int& x, int& y);
-	void SetPos(const int _x, const int _y);
 private:
 
 	static constexpr unsigned int nKeys = 256u;
 	static constexpr unsigned int bufferSize = 16u;
 	int WheelDeltaStep = 0;
-	bool leftMouse, rightMouse;
+	bool leftMouse, rightMouse, middleMouse;
 	int x, y;
 	std::bitset<nKeys> keystates;
 	std::queue<Event> keyBuffer;

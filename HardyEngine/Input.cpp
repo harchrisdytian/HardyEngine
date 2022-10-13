@@ -54,6 +54,17 @@ std::optional<Event> Input::ReadChar()
     return {};
 }
 
+std::optional<Event> Input::ReadMouse()
+{
+    if (mouseBuffer.size() > 0u) 
+    {
+        const Event e = mouseBuffer.front();
+        mouseBuffer.pop();
+        return e;
+    }
+    return {};
+}
+
 void Input::Flush()
 {
     FlushKey();
@@ -121,6 +132,16 @@ void Input::GetPos(int& pX, int& pY)
     pY = y;
 }
 
+int Input::GetPosX()
+{
+    return x;
+}
+
+int Input::GetPosY()
+{
+    return y;
+}
+
 void Input::SetPos(const int _x, const int _y)
 {
     x = _x;
@@ -133,16 +154,20 @@ void Input::OnWheelDelta(int delta) {
         MouseUp();
         WheelDeltaStep -= WheelDeltaStep;
     }
-    while (WheelDeltaStep <= WHEEL_DELTA) {
-        MouseDown();
+    while (WheelDeltaStep <= -WHEEL_DELTA) {
         WheelDeltaStep += WheelDeltaStep;
+        MouseDown();
     }
 }
 
 void Input::MouseUp()
 {
+    Event e(Event::Type::MOUSE_WHEEL_UP, x,y,leftMouse, rightMouse);
+    mouseBuffer.push(e);
 }
 
 void Input::MouseDown()
 {
+    Event e(Event::Type::MOUSE_WHEEL_DOWN, x, y, leftMouse, rightMouse);
+    mouseBuffer.push(e);
 }

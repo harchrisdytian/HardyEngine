@@ -43,6 +43,10 @@ public:
 	{
 		return type == MOUSE_LEFT_PRESSED || type == Type::MOUSE_LEFT_RELEASED;
 	}
+	bool IsMiddle() 
+	{
+		return type == Type::MOUSE_MIDDLE_PRESSED || type == Type::MOUSE_MIDDLE_RELEASED;
+	}
 	void SetPos(int x, int y);
 	bool IsPressed();
 	bool IsReleased();
