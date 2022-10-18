@@ -9,6 +9,7 @@
 
 class Graphics
 {
+	friend class Bindable;
 	//they did surgery on a grape 
 public:
 	Graphics(HWND window,int height, int width);
