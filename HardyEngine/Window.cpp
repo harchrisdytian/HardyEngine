@@ -38,6 +38,7 @@ Window::Window(int height, int width, const char* name)
 	width(width), 
 	height(height)
 {
+	
 	//set the size of window
 	RECT rect;
 	rect.left = 100;
@@ -53,6 +54,7 @@ Window::Window(int height, int width, const char* name)
 		rect.bottom - rect.top,
 		nullptr, nullptr, WindowClass::GetInstance(), this);
 	
+	graphics = std::make_unique<Graphics>(hWindow,width,height);
 	ShowWindow(hWindow, SW_SHOWDEFAULT);
 	
 
@@ -65,7 +67,25 @@ Window::~Window()
 }
 
 
-LRESULT CALLBACK Window::MessageHandle(HWND hWnd,UINT uMsg,WPARAM wParameter, LPARAM lParameter) 
+HWND Window::GetHandle()
+{
+	return hWindow;
+}
+
+std::optional<int> Window::ProcessMessage()
+{
+	MSG msg;
+	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
+		if (msg.message == WM_QUIT) {
+			return (int)msg.wParam;
+		}
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+	return {};
+}
+
+LRESULT CALLBACK Window::MessageHandle(HWND hWnd,UINT uMsg,WPARAM wParameter, LPARAM lParameter)
 {
 	
 	switch (uMsg)
@@ -193,4 +213,11 @@ LRESULT Window::MessageTranslator(HWND hWindow, UINT uMsg, WPARAM wParameter, LP
 	Window* const pWindow = reinterpret_cast<Window*>(GetWindowLongPtr(hWindow, GWLP_USERDATA));
 	// parse threw pointer 
 	return pWindow->MessageHandle(hWindow, uMsg, wParameter, lParameter);
+}
+
+Graphics& Window::GetGraphics()
+{
+	if (graphics)
+		return *graphics;
+
 }
