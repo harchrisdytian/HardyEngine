@@ -20,6 +20,8 @@ int Engine::Init()
 bool Engine::Frame()
 {
 	window.GetGraphics().EndFrame();
+	const std::string name = std::to_string( timer.Peak());
+	window.ChangeName(name);
 
 	return true;
 }

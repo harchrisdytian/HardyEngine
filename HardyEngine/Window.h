@@ -32,6 +32,7 @@ public:
 		~Window();
 		Window(const Window& window) = delete;
 		Window& operator=(const Window& window) = delete;
+		void ChangeName(std::string name);
 		HWND GetHandle();
 		static std::optional<int> ProcessMessage();
 		static constexpr const char* windowClassName = "Hardy Engine";

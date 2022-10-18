@@ -67,6 +67,11 @@ Window::~Window()
 }
 
 
+void Window::ChangeName(std::string name)
+{
+	SetWindowText(hWindow, name.c_str());
+}
+
 HWND Window::GetHandle()
 {
 	return hWindow;
