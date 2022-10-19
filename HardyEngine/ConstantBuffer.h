@@ -8,14 +8,14 @@ public:
 	void Update(Graphics& _graphics, const C& consts) 
 	{
 		D3D11_MAPPED_SUBRESOURCE ConstantBufferSubResource;
-		GetContext(_graphics)->Map(m_ConstantBuffer.Get(), 0u, D3D11_MAP_WRITE_DISCARD, &ConstantBufferSubResource);
-		memccpy(ConstantBufferSubResource.pData, &consts, sizeof(consts));
+		GetContext(_graphics)->Map(m_ConstantBuffer.Get(), 0u, D3D11_MAP_WRITE_DISCARD, 0u,&ConstantBufferSubResource);
+		memcpy(ConstantBufferSubResource.pData, &consts, sizeof(consts));
 		GetContext(_graphics)->Unmap(m_ConstantBuffer.Get(), 0u);
 
 	}
 	ConstantBuffer(Graphics& _Graphics, const C& consts)
 	{
-		INFOMAN(gfx);
+
 
 		D3D11_BUFFER_DESC ConstantBufferDescription;
 		ConstantBufferDescription.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -31,14 +31,14 @@ public:
 	}
 	ConstantBuffer(Graphics& _Graphics)
 	{
-		INFOMAN(gfx);
+
 
 		D3D11_BUFFER_DESC ConstantBufferDescription;
 		ConstantBufferDescription.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		ConstantBufferDescription.Usage = D3D11_USAGE_DYNAMIC;
 		ConstantBufferDescription.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		ConstantBufferDescription.MiscFlags = 0u;
-		ConstantBufferDescription.ByteWidth = sizeof(consts);
+		ConstantBufferDescription.ByteWidth = sizeof( C );
 		ConstantBufferDescription.StructureByteStride = 0u;
 		GetDevice(_Graphics)->CreateBuffer(&ConstantBufferDescription, nullptr, &m_ConstantBuffer);
 	}

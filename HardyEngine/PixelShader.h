@@ -3,6 +3,7 @@
 #include "Bindable.h"
 class PixelShader : public Bindable
 {
+public:
 	PixelShader(Graphics& _graphics, const std::wstring& path);
 	void Bind(Graphics& _graphics) override;
 protected:

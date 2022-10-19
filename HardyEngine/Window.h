@@ -2,8 +2,8 @@
 
 //#include "Event.h"
 #include "Graphics.h"
-#include <Windows.h>
 #include "Input.h"
+#include <Windows.h>
 #include <memory>
 #include <optional>
 

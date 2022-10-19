@@ -1,0 +1,343 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.29.30136.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x0023C1B0 -il C:\\Users\\allis\\AppData\\Local\\Temp\\_CL_8d3f9f37ast -typedil -f Drawable.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1929 -D_MSC_FULL_VER=192930136 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -DCODE_ANALYSIS -D_DEBUG -D_CONSOLE -D_MBCS -EHs -D_CPPUNWIND -EHc -D__MSVC_RUNTIME_CHECKS -RTCs -RTCu -MDd -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -std:c++latest -Fox64\\Debug\\Drawable.obj -Fdx64\\Debug\\vc142.pdb -external:W 3 -Gd -analyze:projectdirectory C:\\Users\\allis\\Documents\\GitHub\\HardyEngine\\HardyEngine\\HardyEngine -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um -external:I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\include -external:I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\atlmfc\\include -external:I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -external:I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um",
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/allis/Documents/GitHub/HardyEngine/HardyEngine/HardyEngine/Event.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "78c542e3e7f963100c9fd055cb58c659"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/allis/Documents/GitHub/HardyEngine/HardyEngine/HardyEngine/Window.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "f9181a7ee86fd8eb5be64ec031ee86f6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/allis/Documents/GitHub/HardyEngine/HardyEngine/HardyEngine/Input.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "4b02f101d36531c818c1545c30924fde"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/window.h"
+          },
+          "hashes": {
+            "md5": "796900b541837ae19c85361f331aaf78"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/graphics.h"
+          },
+          "hashes": {
+            "md5": "7d2381abebe6e2e0512989157a2544ea"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/vertexshader.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "a4bf6fee3a4a81d1c302eb661824a529"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/vertexshader.h"
+          },
+          "hashes": {
+            "md5": "69f04b6311facf10cb5adb48a722baea"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/bindable.h"
+          },
+          "hashes": {
+            "md5": "629643137710a770fb9a04dda2da31c2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/vertexbuffer.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "f4c9c3a79777fa2c19d39827d7d00307"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/vertexbuffer.h"
+          },
+          "hashes": {
+            "md5": "b75151c45e957f7e948357c3c78ba999"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/transformconstantbuffer.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "be7cc45b08665af80ee3f2201bad9b9d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/transformconstantbuffer.h"
+          },
+          "hashes": {
+            "md5": "a15483cad266fdc8b088270c2c0d5750"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/constantbuffer.h"
+          },
+          "hashes": {
+            "md5": "3693cc306977f3fcbd951fe624771568"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/drawable.h"
+          },
+          "hashes": {
+            "md5": "f77d37d44f4f3575746f15e3f32f96b1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/topology.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "3a4c4775b817c91d376be0c1889e96d0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/topology.h"
+          },
+          "hashes": {
+            "md5": "a5fdaebd8d907d3df7c5e5c8e1c1161a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/time.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "6dbbb133e68f678ad1cda2590d170efc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/time.h"
+          },
+          "hashes": {
+            "md5": "7d6354351937250d4949d3b7dfca2f1c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/pixelshader.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "33693a3c25fbfaf0907de78f6c76459a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/pixelshader.h"
+          },
+          "hashes": {
+            "md5": "3e2eb1548c7381b043e9221181d1d10c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/inputlayout.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "4c69b68b9de5a1ada26adb6d743aa4b2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/inputlayout.h"
+          },
+          "hashes": {
+            "md5": "e00f39250a58c2c580cef965e50c6f0c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/input.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "ce5c7f6519f43e75d80ef0fb660394bd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/indexbuffer.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "49f5dffef98f90068f7fb471d0a2a061"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/indexbuffer.h"
+          },
+          "hashes": {
+            "md5": "6eadcf41a87a4d541042f560eea809cb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/allis/Documents/GitHub/HardyEngine/HardyEngine/HardyEngine/Graphics.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "0069b2a5a4a99238c6ed8afbe1057066"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/exceptionhandler.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "f27c66a8f9a946084fe82cb9c3baacc5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/exceptionhandler.h"
+          },
+          "hashes": {
+            "md5": "9812bd33c2e2c66cf4e026807351ea3a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/allis/Documents/GitHub/HardyEngine/HardyEngine/HardyEngine/Event.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "ea83a85451c079999d27a21236f125b1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/engine.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "85d32a65c679e3361206789bc71b31e4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/engine.h"
+          },
+          "hashes": {
+            "md5": "1f2820798089cba51c0857faa6e58bab"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/cube.h"
+          },
+          "hashes": {
+            "md5": "2e544769373167abaa54ca89371a89c2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/allis/documents/github/hardyengine/hardyengine/hardyengine/drawable.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "9a4c783ca9ba15119234d027faed0cf6"
+          }
+        }
+      ]
+    }
+  ]
+}
