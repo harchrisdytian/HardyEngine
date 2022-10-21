@@ -9,5 +9,6 @@ public:
 protected:
 	static ID3D11DeviceContext* GetContext(Graphics& _graphics);
 	static ID3D11Device* GetDevice(Graphics& _graphics);
+	static DxgiInfoManager& GetInfoManager(Graphics& gfx);
 };
 

@@ -1,5 +1,6 @@
 #include "Drawable.h"
 #include "IndexBuffer.h"
+#include "GraphicsThrowMacros.h"
 #include "Bindable.h"
 
 void Drawable::Draw(Graphics& _Graphics) const

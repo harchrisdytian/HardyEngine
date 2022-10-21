@@ -9,6 +9,9 @@ TransformConstantBuffer::TransformConstantBuffer(Graphics& _Graphics, const Draw
 
 void TransformConstantBuffer::Bind(Graphics& _Graphics)
 {
-	m_VertexMatrixBuffer.Update(_Graphics, DirectX::XMMatrixTranspose(parent.GetTransformXM() * _Graphics.GetProjection()));
+	m_VertexMatrixBuffer.Update(
+		_Graphics,
+
+		DirectX::XMMatrixTranspose(parent.GetTransformXM() * _Graphics.GetProjection()));
 	m_VertexMatrixBuffer.Bind(_Graphics);
 }

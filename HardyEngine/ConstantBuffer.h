@@ -40,6 +40,7 @@ public:
 		ConstantBufferDescription.MiscFlags = 0u;
 		ConstantBufferDescription.ByteWidth = sizeof( C );
 		ConstantBufferDescription.StructureByteStride = 0u;
+			
 		GetDevice(_Graphics)->CreateBuffer(&ConstantBufferDescription, nullptr, &m_ConstantBuffer);
 	}
 protected:

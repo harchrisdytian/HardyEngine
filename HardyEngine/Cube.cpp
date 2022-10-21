@@ -66,6 +66,7 @@ Cube::Cube(Graphics& _Graphics,
 		0,1,4, 1,5,4
 	};
 	AddIndexBuffer(std::make_unique<IndexBuffer>(_Graphics, indices));
+
 	struct ConstantBuffer2
 	{
 		struct
@@ -95,7 +96,7 @@ Cube::Cube(Graphics& _Graphics,
 	};
 	AddBind(std::make_unique<InputLayout>(_Graphics, InputElementDescription, byteVertShade));
 
-	AddBind(std::make_unique<Topology>(_Graphics,D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+	AddBind(std::make_unique<Topology>(_Graphics, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
 
 	AddBind(std::make_unique<TransformConstantBuffer>(_Graphics, *this));
 

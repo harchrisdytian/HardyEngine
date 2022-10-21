@@ -1,6 +1,7 @@
 #include "ExceptionHandler.h"
 
 #include <sstream>
+#include <sdkddkver.h>
 
 
 ExceptionHandler::ExceptionHandler(int line, const char* file) noexcept
