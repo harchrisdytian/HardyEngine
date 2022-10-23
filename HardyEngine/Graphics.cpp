@@ -1,6 +1,7 @@
 #include "Graphics.h"
 #include <sstream>
 #include <d3dcompiler.h>
+#include "dxerr.h"
 #include <cmath>
 #include <DirectXMath.h>
 #include "GraphicsThrowMacros.h"
@@ -8,7 +9,6 @@
 
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"D3DCompiler.lib")
-#include "dxerr.h"
 
 
 Graphics::Graphics(HWND window, int height, int width)
@@ -46,7 +46,7 @@ Graphics::Graphics(HWND window, int height, int width)
 	Microsoft::WRL::ComPtr<ID3D11Resource> backBuffer;
 	swapchain->GetBuffer(0, __uuidof(ID3D11Resource), &backBuffer);
 
-	GFX_THROW_INFO(device->CreateRenderTargetView(backBuffer.Get(), nullptr, renderTargetView.GetAddressOf()));
+	GFX_THROW_INFO(device->CreateRenderTargetView(backBuffer.Get(), nullptr, &renderTargetView));
 
 
 
@@ -62,8 +62,8 @@ Graphics::Graphics(HWND window, int height, int width)
 
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencil;
 	D3D11_TEXTURE2D_DESC depthTextureDescription = {};
-	depthTextureDescription.Width = screenWidth;
-	depthTextureDescription.Height = screenHeight;
+	depthTextureDescription.Width = 800u;
+	depthTextureDescription.Height = 600u;
 	depthTextureDescription.MipLevels = 1u;
 	depthTextureDescription.ArraySize = 1u;
 	depthTextureDescription.Format = DXGI_FORMAT_D32_FLOAT;
@@ -80,11 +80,11 @@ Graphics::Graphics(HWND window, int height, int width)
 	depthStencilViewDesc.Texture2D.MipSlice = 0u;
 	device->CreateDepthStencilView(depthStencil.Get(), &depthStencilViewDesc, &DepthStencilView);
 
-	deviceContext->OMSetRenderTargets(0u, renderTargetView.GetAddressOf(), DepthStencilView.Get());
+	deviceContext->OMSetRenderTargets(1u, renderTargetView.GetAddressOf(), DepthStencilView.Get());
 
 	D3D11_VIEWPORT viewPort;
-	viewPort.Height = 800;
-	viewPort.Width = 600;
+	viewPort.Height = 600.0f; ;
+	viewPort.Width = 800.0f;
 	viewPort.MinDepth = 0.0f;
 	viewPort.MaxDepth = 1.0f;
 	viewPort.TopLeftX = 0.0f;

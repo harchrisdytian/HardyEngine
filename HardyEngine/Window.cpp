@@ -44,9 +44,9 @@ Window::Window(int height, int width, const char* name)
 	//set the size of window
 	RECT rect;
 	rect.left = 100;
-	rect.right = width + 100;
+	rect.right = width + rect.left;
 	rect.top = 100;
-	rect.bottom = 100 + height;
+	rect.bottom = rect.top + height;
 
 
 	hWindow = CreateWindow( TEXT(windowClassName), TEXT(name),

@@ -24,7 +24,7 @@ public:
 		ConstantBufferDescription.MiscFlags = 0u;
 		ConstantBufferDescription.ByteWidth = sizeof(consts);
 		ConstantBufferDescription.StructureByteStride = 0u;
-
+		
 		D3D11_SUBRESOURCE_DATA ConstantBufferData = {};
 		ConstantBufferData.pSysMem = &consts;
 		GetDevice(_Graphics)->CreateBuffer(&ConstantBufferDescription, &ConstantBufferData, &m_ConstantBuffer);

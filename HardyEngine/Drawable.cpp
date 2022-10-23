@@ -14,11 +14,14 @@ void Drawable::Draw(Graphics& _Graphics) const
 
 void Drawable::AddBind(std::unique_ptr<Bindable> bind)
 {
+
+	assert("*Must* use AddIndexBuffer to bind index buffer" && typeid(*bind) != typeid(IndexBuffer));
 	binds.push_back(std::move(bind));
 }
 
 void Drawable::AddIndexBuffer(std::unique_ptr<IndexBuffer> _indexBuf)
 {
+	assert("Attempting to add index buffer a second time" && m_IndexBuffer == nullptr);
 	m_IndexBuffer = _indexBuf.get();
 	binds.push_back( std::move(_indexBuf));
 }

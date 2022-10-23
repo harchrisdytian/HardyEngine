@@ -3,7 +3,7 @@
 class IndexBuffer : public Bindable
 {
 public:
-	IndexBuffer(Graphics& _graphics,std::vector<unsigned short> indices);
+	IndexBuffer(Graphics& _graphics, const std::vector<unsigned short>& indices);
 	void Bind(Graphics& _graphics) override;
 	UINT GetCount() const;
 protected:

@@ -1,5 +1,6 @@
 #include "PixelShader.h"
 #include "GraphicsThrowMacros.h"
+
 PixelShader::PixelShader(Graphics& _graphics, const std::wstring& path)
 {
 	INFOMAN(_graphics);

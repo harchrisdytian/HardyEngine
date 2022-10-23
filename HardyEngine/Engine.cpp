@@ -4,7 +4,7 @@
 #include "Cube.h"
 
 Engine::Engine():
-	window(700,800 ,"yes")
+	window(600,800 ,"yes")
 {
 	
 	std::mt19937 rng(std::random_device{}());
@@ -12,7 +12,7 @@ Engine::Engine():
 	std::uniform_real_distribution<float> ddist(0.0f, 3.1415f * 2.0f);
 	std::uniform_real_distribution<float> odist(0.0f, 3.1415f * 0.3f);
 	std::uniform_real_distribution<float> rdist(6.0f, 20.0f);
-	for (auto i = 0; i < 1; i++)
+	for (auto i = 0; i < 80; i++)
 	{
 		cubes.push_back(std::make_unique<Cube>(window.GetGraphics(),rng,adist,ddist,odist,rdist));
 	}
@@ -39,7 +39,7 @@ bool Engine::Frame()
 {
 	auto deltaTime = timer.Mark();
 	const std::string name = std::to_string( timer.Peak());
-	window.GetGraphics().ClearBuffer(0.07f, 0.0f, 0.12f);
+	window.GetGraphics().ClearBuffer(0.47f, 0.0f, 0.12f);
 	for (auto& c : cubes) {
 		c->Draw(window.GetGraphics());
 		c->Update(deltaTime);

@@ -2,7 +2,7 @@
 #include "GraphicsThrowMacros.h"
 
 
-IndexBuffer::IndexBuffer(Graphics& _graphics, std::vector<unsigned short> indices):
+IndexBuffer::IndexBuffer(Graphics& _graphics, const std::vector<unsigned short>& indices):
 	count((UINT) indices.size())
 
 {
@@ -13,7 +13,6 @@ IndexBuffer::IndexBuffer(Graphics& _graphics, std::vector<unsigned short> indice
 	IndexBufferDescription.CPUAccessFlags = 0u;
 	IndexBufferDescription.MiscFlags = 0u;
 	IndexBufferDescription.ByteWidth = UINT(count * sizeof(unsigned short));
-
 	IndexBufferDescription.StructureByteStride = sizeof(unsigned short);
 
 	D3D11_SUBRESOURCE_DATA IndexBufferData = {};
