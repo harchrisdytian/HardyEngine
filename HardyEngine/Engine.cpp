@@ -1,7 +1,7 @@
 #include "Engine.h"
 
-#include <memory>
 #include "Cube.h"
+#include <memory>
 
 Engine::Engine():
 	window(600,800 ,"yes")
