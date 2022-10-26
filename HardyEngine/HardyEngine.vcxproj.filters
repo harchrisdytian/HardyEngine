@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Bindable">
       <UniqueIdentifier>{4f536bd5-fb37-44f3-a29d-75bc7b4d6370}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Primitives">
+      <UniqueIdentifier>{b4859800-8e67-40de-92d8-6c446d584b00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -161,11 +164,20 @@
     <ClInclude Include="DrawableBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cuboid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IndexTriangleList.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cuboid.h">
+      <Filter>Header Files\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>Header Files\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\Primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

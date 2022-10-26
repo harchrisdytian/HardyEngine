@@ -9,7 +9,7 @@
 #include "VertexBuffer.h"
 #include "VertexShader.h"
 #include <memory>
-
+#include "Cylinder.h"
 Cube::Cube(Graphics& _Graphics,
 	std::mt19937& rng,
 	std::uniform_real_distribution<float>& adist, 
@@ -31,27 +31,13 @@ Cube::Cube(Graphics& _Graphics,
 		{
 			struct Vertex
 			{
-				struct
-				{
-					float x;
-					float y;
-					float z;
-				} pos;
-			};
-			const std::vector<Vertex> vertices =
-			{
-				{ -1.0f,-1.0f,-1.0f },
-				{ 1.0f,-1.0f,-1.0f },
-				{ -1.0f,1.0f,-1.0f },
-				{ 1.0f,1.0f,-1.0f },
-				{ -1.0f,-1.0f,1.0f },
-				{ 1.0f,-1.0f,1.0f },
-				{ -1.0f,1.0f,1.0f },
-				{ 1.0f,1.0f,1.0f },
+				DirectX::XMFLOAT3 pos;
 			};
 
+			auto model = Cylinder::Make<Vertex>();
+			model.Transform(DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f));
 			//vertex buffer
-			AddStaticBind(std::make_unique<VertexBuffer>(_Graphics, vertices));
+			AddStaticBind(std::make_unique<VertexBuffer>(_Graphics, model.Vertices));
 
 			auto vertShade = std::make_unique<VertexShader>(_Graphics, L"VertexShader.cso");
 			auto byteVertShade = vertShade->GetByteCode();
@@ -59,16 +45,8 @@ Cube::Cube(Graphics& _Graphics,
 
 			AddStaticBind(std::make_unique<PixelShader>(_Graphics, L"PixelShader.cso"));
 
-			const std::vector<unsigned short> indices =
-			{
-				0,2,1, 2,3,1,
-				1,3,5, 3,7,5,
-				2,6,3, 3,6,7,
-				4,5,7, 4,7,6,
-				0,4,2, 2,4,6,
-				0,1,4, 1,5,4
-			};
-			AddStaticIndexBuffer(std::make_unique<IndexBuffer>(_Graphics, indices));
+			
+			AddStaticIndexBuffer(std::make_unique<IndexBuffer>(_Graphics, model.Indices));
 
 			struct ConstantBuffer2
 			{

@@ -185,6 +185,7 @@
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cuboid.h" />
+    <ClInclude Include="Cylinder.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="DrawableBase.h" />
     <ClInclude Include="dxerr.h" />
@@ -198,7 +199,9 @@
     <ClInclude Include="IndexTriangleList.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputLayout.h" />
+    <ClInclude Include="MyMath.h" />
     <ClInclude Include="PixelShader.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Topology.h" />
     <ClInclude Include="TransformConstantBuffer.h" />
