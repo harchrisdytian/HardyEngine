@@ -9,13 +9,14 @@
 #include "VertexBuffer.h"
 #include "VertexShader.h"
 #include <memory>
-#include "Cylinder.h"
+#include "Cuboid.h"
 Cube::Cube(Graphics& _Graphics,
 	std::mt19937& rng,
 	std::uniform_real_distribution<float>& adist, 
 	std::uniform_real_distribution<float>& ddist, 
 	std::uniform_real_distribution<float>& odist,
-	std::uniform_real_distribution<float>& rdist):
+	std::uniform_real_distribution<float>& rdist,
+	std::uniform_real_distribution<float>& bdist):
 	r(rdist(rng)),
 	droll(ddist(rng)),
 	dpitch(ddist(rng)),
@@ -34,21 +35,21 @@ Cube::Cube(Graphics& _Graphics,
 				DirectX::XMFLOAT3 pos;
 			};
 
-			auto model = Cylinder::Make<Vertex>();
-			model.Transform(DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f));
+			const auto model = Cuboid::Make<Vertex>();
+			
 			//vertex buffer
 			AddStaticBind(std::make_unique<VertexBuffer>(_Graphics, model.Vertices));
 
-			auto vertShade = std::make_unique<VertexShader>(_Graphics, L"VertexShader.cso");
+			auto vertShade = std::make_unique<VertexShader>(_Graphics, L"VertexShaderIndex.cso");
 			auto byteVertShade = vertShade->GetByteCode();
 			AddStaticBind(std::move(vertShade));
 
-			AddStaticBind(std::make_unique<PixelShader>(_Graphics, L"PixelShader.cso"));
+			AddStaticBind(std::make_unique<PixelShader>(_Graphics, L"PixelShaderIndex.cso"));
 
 			
 			AddStaticIndexBuffer(std::make_unique<IndexBuffer>(_Graphics, model.Indices));
 
-			struct ConstantBuffer2
+			struct PixelShaderConstants
 			{
 				struct
 				{
@@ -56,20 +57,22 @@ Cube::Cube(Graphics& _Graphics,
 					float g;
 					float b;
 					float a;
-				} face_colors[6];
+				} face_colors[8];
 			};
-			const ConstantBuffer2 cb2 =
+			const PixelShaderConstants cb2 =
 			{
 				{
-					{ 1.0f,0.0f,1.0f },
+					{ 1.0f,1.0f,1.0f },
 					{ 1.0f,0.0f,0.0f },
 					{ 0.0f,1.0f,0.0f },
-					{ 0.0f,0.0f,1.0f },
 					{ 1.0f,1.0f,0.0f },
+					{ 0.0f,0.0f,1.0f },
+					{ 1.0f,0.0f,1.0f },
 					{ 0.0f,1.0f,1.0f },
+					{ 0.0f,0.0f,0.0f }
 				}
 			};
-			AddStaticBind(std::make_unique<PixelConstantBuffer<ConstantBuffer2>>(_Graphics, cb2));
+			AddStaticBind(std::make_unique<PixelConstantBuffer<PixelShaderConstants>>(_Graphics, cb2));
 
 			const std::vector<D3D11_INPUT_ELEMENT_DESC> InputElementDescription =
 			{
@@ -86,7 +89,10 @@ Cube::Cube(Graphics& _Graphics,
 
 	AddBind(std::make_unique<TransformConstantBuffer>(_Graphics, *this));
 
-
+	DirectX::XMStoreFloat3x3(
+		&mt,
+		DirectX::XMMatrixScaling(1.0f, 1.0f, bdist(rng))
+	);
 
 }
 
@@ -102,7 +108,8 @@ void Cube::Update(float dt)
 
 DirectX::XMMATRIX Cube::GetTransformXM() const 
 {
-	return DirectX::XMMatrixRotationRollPitchYaw(pitch, yaw, roll) *
+	return DirectX::XMLoadFloat3x3( &mt) * 
+		DirectX::XMMatrixRotationRollPitchYaw(pitch, yaw, roll) *
 		DirectX::XMMatrixTranslation(r, 0.0f, 0.0f) *
 		DirectX::XMMatrixRotationRollPitchYaw(theta, phi, chi) *
 		DirectX::XMMatrixTranslation(0.0f, 0.0f, 20.0f);

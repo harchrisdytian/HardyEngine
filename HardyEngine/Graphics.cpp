@@ -6,6 +6,9 @@
 #include <DirectXMath.h>
 #include "GraphicsThrowMacros.h"
 
+#include "ImGui/imgui_impl_dx11.h"
+#include "ImGui/imgui_impl_win32.h"
+
 
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"D3DCompiler.lib")
@@ -62,8 +65,8 @@ Graphics::Graphics(HWND window, int height, int width)
 
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencil;
 	D3D11_TEXTURE2D_DESC depthTextureDescription = {};
-	depthTextureDescription.Width = 800u;
-	depthTextureDescription.Height = 600u;
+	depthTextureDescription.Width = 784u;
+	depthTextureDescription.Height = 561u;
 	depthTextureDescription.MipLevels = 1u;
 	depthTextureDescription.ArraySize = 1u;
 	depthTextureDescription.Format = DXGI_FORMAT_D32_FLOAT;
@@ -91,12 +94,16 @@ Graphics::Graphics(HWND window, int height, int width)
 	viewPort.TopLeftY = 0.0f;
 	deviceContext->RSSetViewports(1u, &viewPort);
 
-
+	ImGui_ImplDX11_Init(device.Get(), deviceContext.Get());
 }
 
 
 void Graphics::EndFrame()
 {
+	if (imguiEnabled) {
+		ImGui::Render();
+		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	}
 
 	HRESULT hr;
 #ifndef NDEBUG
@@ -232,6 +239,12 @@ std::string Graphics::InfoException::GetErrorInfo() const noexcept
 
 void Graphics::ClearBuffer(float r, float g, float b)
 {
+	if (imguiEnabled)
+	{
+		ImGui_ImplDX11_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+	}
 	const float color[] = { r,g,b,1.0f };
 	deviceContext->ClearRenderTargetView(renderTargetView.Get(), color);
 	deviceContext->ClearDepthStencilView(DepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);

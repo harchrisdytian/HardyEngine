@@ -12,6 +12,8 @@
 #include <memory>
 #include <random>	
 
+
+
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"D3DCompiler.lib")
 
@@ -76,6 +78,7 @@ private:
 	DirectX::XMMATRIX projection;
 	int screenHeight;
 	int screenWidth;
+	bool imguiEnabled = true;
 
 	DxgiInfoManager infoManager;
 

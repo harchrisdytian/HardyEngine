@@ -15,7 +15,8 @@ public:
 private:
 	Window window;
 	Time timer;
-	std::vector<std::unique_ptr<class Cube>> cubes;
-	//std::optional<int> exitCode;
+	std::vector<std::unique_ptr<class Drawable>> drawables;
+	static constexpr size_t nDrawables = 3000;
+
 };
 

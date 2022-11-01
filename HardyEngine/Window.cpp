@@ -1,6 +1,8 @@
 #include "Window.h"
 #include <sstream>
 #include "WindowsThrowMacros.h"
+#include "ImGui/imgui.h"
+#include "ImGui/imgui_impl_win32.h"
 
 //singleton
 Window::WindowClass Window::WindowClass::windowClass;
@@ -40,7 +42,12 @@ Window::Window(int height, int width, const char* name)
 	width(width), 
 	height(height)
 {
-	
+	//maybe move to singleton later
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGui::StyleColorsDark();
+
+
 	//set the size of window
 	RECT rect;
 	rect.left = 100;
@@ -57,7 +64,11 @@ Window::Window(int height, int width, const char* name)
 		nullptr, nullptr, WindowClass::GetInstance(), this);
 	
 	ShowWindow(hWindow, SW_SHOWDEFAULT);
+	ImGui_ImplWin32_Init(hWindow);
+
 	graphics = std::make_unique<Graphics>(hWindow,width,height);
+
+
 	
 
 
@@ -65,6 +76,8 @@ Window::Window(int height, int width, const char* name)
 
 Window::~Window()
 {
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
 	DestroyWindow(hWindow);
 }
 
@@ -81,6 +94,7 @@ HWND Window::GetHandle()
 
 std::optional<int> Window::ProcessMessage()
 {
+
 	MSG msg;
 	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
 		if (msg.message == WM_QUIT) {
@@ -94,7 +108,8 @@ std::optional<int> Window::ProcessMessage()
 
 LRESULT CALLBACK Window::MessageHandle(HWND hWnd,UINT uMsg,WPARAM wParameter, LPARAM lParameter)
 {
-	
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParameter, lParameter))
+		return true;
 	switch (uMsg)
 	{
 	case WM_CLOSE:

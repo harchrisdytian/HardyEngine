@@ -7,6 +7,7 @@
 #include <Windows.h>
 #include <memory>
 #include <optional>
+#include "ImGui/imgui.h"
 
 class Window
 {
