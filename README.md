@@ -1,6 +1,6 @@
 # HardyEngine
  
-A 3d Rendering engine created to teach myself modern rendering techniques. This code base is inspired by ChiliTomatoNoodles and Jpres on youtube. 
+A 3d Rendering engine created to teach myself modern rendering techniques. This codebase is inspired by ChiliTomatoNoodles and Jpres on youtube. 
 
 # current features implemented
 
