@@ -1,16 +1,16 @@
 # HardyEngine
  
-A 3d Rendering engine created to teach myself modern rendering techniques. This codebase is inspired by ChiliTomatoNoodles and Jpres on youtube. 
+A 3D Rendering Engine created to teach myself modern rendering techniques. This codebase is inspired and influenced by ChiliTomatoNoodles and Jpres on YouTube. 
 
-# current features implemented
+# Current Features Implemented
 
 * Indexed rendering through drawIndexed
 * Bindable system using a template class
 * ImGui Control system
 * Input handling through windows messages and a custom data class
-* multiple geometric primitives used as tests
+* Multiple geometric primitives used as tests
 
-# future features
+# Future Features
 
 * Phong lighting
 * Differed shading 
