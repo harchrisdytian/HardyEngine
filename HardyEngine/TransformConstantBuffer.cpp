@@ -1,17 +1,29 @@
 #include "TransformConstantBuffer.h"
 
 TransformConstantBuffer::TransformConstantBuffer(Graphics& _Graphics, const Drawable& parent):
-	m_VertexMatrixBuffer(_Graphics),
 	parent(parent)
 {
-
+	if (!m_VertexMatrixBuffer) {
+		m_VertexMatrixBuffer = std::make_unique<VertexConstantBuffer<ModelTransform>> (_Graphics);
+	}
 }
 
 void TransformConstantBuffer::Bind(Graphics& _Graphics)
 {
-	m_VertexMatrixBuffer.Update(
-		_Graphics,
+	const auto model = parent.GetTransformXM();
+	const ModelTransform transfrom =
+	{
+		DirectX::XMMatrixTranspose(model),
+		DirectX::XMMatrixTranspose(
+		model *
+		_Graphics.GetCamera() *
+		_Graphics.GetProjection()
+		)
+	};
+	m_VertexMatrixBuffer->Update(_Graphics, transfrom);
 
-		DirectX::XMMatrixTranspose(parent.GetTransformXM() * _Graphics.GetProjection()));
-	m_VertexMatrixBuffer.Bind(_Graphics);
+
+	m_VertexMatrixBuffer->Bind(_Graphics);
 }
+
+std::unique_ptr<VertexConstantBuffer<TransformConstantBuffer::ModelTransform>> TransformConstantBuffer::m_VertexMatrixBuffer;

@@ -72,14 +72,15 @@ public:
 	
 	void ClearBuffer(float r, float g, float b);
 	DirectX::XMMATRIX GetProjection();
-
-
+	DirectX::XMMATRIX GetCamera();
+	void SetCamera(DirectX::XMMATRIX cam);
 private:
 	DirectX::XMMATRIX projection;
 	int screenHeight;
 	int screenWidth;
 	bool imguiEnabled = true;
 
+	DirectX::XMMATRIX camera;
 	DxgiInfoManager infoManager;
 
 	Microsoft::WRL::ComPtr<ID3D11Device> device;

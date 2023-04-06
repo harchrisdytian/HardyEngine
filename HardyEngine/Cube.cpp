@@ -10,6 +10,7 @@
 #include "VertexShader.h"
 #include <memory>
 #include "Cuboid.h"
+
 Cube::Cube(Graphics& _Graphics,
 	std::mt19937& rng,
 	std::uniform_real_distribution<float>& adist, 
@@ -33,50 +34,38 @@ Cube::Cube(Graphics& _Graphics,
 			struct Vertex
 			{
 				DirectX::XMFLOAT3 pos;
+				DirectX::XMFLOAT3 normal;
 			};
 
-			const auto model = Cuboid::Make<Vertex>();
-			
+			 auto model = Cuboid::MakeIndependent<Vertex>();
+			 model.SetNormalsFlat();
+			 //last thing 
+
 			//vertex buffer
 			AddStaticBind(std::make_unique<VertexBuffer>(_Graphics, model.Vertices));
 
-			auto vertShade = std::make_unique<VertexShader>(_Graphics, L"VertexShaderIndex.cso");
+
+			auto vertShade = std::make_unique<VertexShader>(_Graphics, L"VertexShaderPhong.cso");
 			auto byteVertShade = vertShade->GetByteCode();
 			AddStaticBind(std::move(vertShade));
 
-			AddStaticBind(std::make_unique<PixelShader>(_Graphics, L"PixelShaderIndex.cso"));
+			AddStaticBind(std::make_unique<PixelShader>(_Graphics, L"PixelShaderPhong.cso"));
 
 			
 			AddStaticIndexBuffer(std::make_unique<IndexBuffer>(_Graphics, model.Indices));
 
 			struct PixelShaderConstants
 			{
-				struct
-				{
-					float r;
-					float g;
-					float b;
-					float a;
-				} face_colors[8];
+				DirectX::XMFLOAT3 pos;
+				DirectX::XMFLOAT3 normal;
 			};
-			const PixelShaderConstants cb2 =
-			{
-				{
-					{ 1.0f,1.0f,1.0f },
-					{ 1.0f,0.0f,0.0f },
-					{ 0.0f,1.0f,0.0f },
-					{ 1.0f,1.0f,0.0f },
-					{ 0.0f,0.0f,1.0f },
-					{ 1.0f,0.0f,1.0f },
-					{ 0.0f,1.0f,1.0f },
-					{ 0.0f,0.0f,0.0f }
-				}
-			};
-			AddStaticBind(std::make_unique<PixelConstantBuffer<PixelShaderConstants>>(_Graphics, cb2));
+
+		
 
 			const std::vector<D3D11_INPUT_ELEMENT_DESC> InputElementDescription =
 			{
 				{ "Position",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0 },
+				{ "Normal",0,DXGI_FORMAT_R32G32B32_FLOAT,0,12,D3D11_INPUT_PER_VERTEX_DATA,0 },
 			};
 			AddStaticBind(std::make_unique<InputLayout>(_Graphics, InputElementDescription, byteVertShade));
 
@@ -108,9 +97,8 @@ void Cube::Update(float dt)
 
 DirectX::XMMATRIX Cube::GetTransformXM() const 
 {
-	return DirectX::XMLoadFloat3x3( &mt) * 
+	return DirectX::XMLoadFloat3x3(&mt) *
 		DirectX::XMMatrixRotationRollPitchYaw(pitch, yaw, roll) *
 		DirectX::XMMatrixTranslation(r, 0.0f, 0.0f) *
-		DirectX::XMMatrixRotationRollPitchYaw(theta, phi, chi) *
-		DirectX::XMMatrixTranslation(0.0f, 0.0f, 20.0f);
+		DirectX::XMMatrixRotationRollPitchYaw(theta, phi, chi);
 }

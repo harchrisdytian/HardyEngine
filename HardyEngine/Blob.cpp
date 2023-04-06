@@ -101,11 +101,10 @@ void Blob::Update(float dt)
 	chi += dchi * dt;
 }
 
-DirectX::XMMATRIX Blob::GetTransformXM() const 
+DirectX::XMMATRIX Blob::GetTransformXM() const
 {
 	namespace dx = DirectX;
 	return dx::XMMatrixRotationRollPitchYaw(pitch, yaw, roll) *
 		dx::XMMatrixTranslation(r, 0.0f, 0.0f) *
-		dx::XMMatrixRotationRollPitchYaw(theta, phi, chi) *
-		dx::XMMatrixTranslation(0.0f, 0.0f, 20.0f);
+		dx::XMMatrixRotationRollPitchYaw(theta, phi, chi);
 }

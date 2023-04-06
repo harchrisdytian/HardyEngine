@@ -15,7 +15,8 @@
 ResourceManager resourceManager;
 
 Engine::Engine():
-	window(600,800 ,"yes")
+	window(600,800 ,"yes"),
+	light(window.GetGraphics())
 {
 
 
@@ -31,32 +32,12 @@ Engine::Engine():
 		{}
 		std::unique_ptr<Drawable> operator()()
 		{
-			switch (typedist(rng))
-			{
-			case 0:
-				return std::make_unique<Pyramid>(
-					gfx, rng, adist, ddist,
-					odist, rdist
-					);
-			case 1:
+			
 				return std::make_unique<Cube>(
 					gfx, rng, adist, ddist,
 					odist, rdist, bdist
 					);
-			case 2:
-				return std::make_unique<Blob>(
-					gfx, rng, adist, ddist,
-					odist, rdist, longdist, latdist
-					);
-			case 3:
-				return std::make_unique<Sheet>(
-					gfx, rng, adist, ddist,
-					odist, rdist
-					);
-			default:
-				assert(false && "bad drawable type in factory");
-				return {};
-			}
+		
 		}
 	private:
 		Graphics& gfx;
@@ -68,13 +49,13 @@ Engine::Engine():
 		std::uniform_real_distribution<float> bdist{ 0.4f,3.0f };
 		std::uniform_int_distribution<int> latdist{ 5,20 };
 		std::uniform_int_distribution<int> longdist{ 10,40 };
-		std::uniform_int_distribution<int> typedist{ 0,3 };
+		std::uniform_int_distribution<int> typedist{ 1,1 };
 	};
 
 	Factory f(window.GetGraphics());
 	drawables.reserve(nDrawables);
 	std::generate_n(std::back_inserter(drawables), nDrawables, f);
-
+	
 	window.GetGraphics().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 40.0f));
 }
 
@@ -98,22 +79,23 @@ int Engine::Init()
 bool Engine::Frame()
 {
 	auto deltaTime = timer.Mark();
+
 	const std::string name = std::to_string( timer.Peak());
 	window.GetGraphics().ClearBuffer(0.47f, 0.0f, 0.12f);
 	for (auto& c : drawables) {
 		c->Draw(window.GetGraphics());
 		c->Update(deltaTime);
 	}
+	window.GetGraphics().SetCamera(cam.GetMatrix());
+
+	light.Bind(window.GetGraphics(), cam.GetMatrix());
+	light.Draw(window.GetGraphics());
 
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
-	static bool bowl = true;
-	if (bowl) {
-		ImGui::ShowDemoWindow(&bowl);
+	
+	cam.SpawnControlWindow();
 
-	}
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 	window.GetGraphics().EndFrame();
 	
 	return true;

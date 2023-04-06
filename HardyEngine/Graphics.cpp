@@ -254,3 +254,13 @@ DirectX::XMMATRIX Graphics::GetProjection()
 {
 	return projection;
 }
+
+DirectX::XMMATRIX Graphics::GetCamera()
+{
+	return camera;
+}
+
+void Graphics::SetCamera(DirectX::XMMATRIX cam)
+{
+	camera = cam;
+}

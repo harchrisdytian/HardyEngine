@@ -2,6 +2,8 @@
 #include <optional>
 #include "Window.h"
 #include "Time.h"
+#include "Camera.h"
+#include "PointLight.h"
 
 
 class Engine
@@ -15,8 +17,10 @@ public:
 private:
 	Window window;
 	Time timer;
+	Camera cam;
 	std::vector<std::unique_ptr<class Drawable>> drawables;
-	static constexpr size_t nDrawables = 3000;
+	static constexpr size_t nDrawables = 330;
+	PointLight light;
 
 };
 
